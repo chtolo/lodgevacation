@@ -133,6 +133,7 @@ label {
 #camera_wrap_4 {
 	bottom: 0;
 	height: 100%;
+	width: 100%;
 	left: 0;
 	margin-bottom: 0!important;
 	position: absolute;
@@ -154,6 +155,15 @@ label {
 }
 .camera_overlayer {
 	opacity: .1;
+}
+.centered-text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: white;
+	font-size: 36px;
 }
 .panel {
 	margin-bottom: 0px;
@@ -181,6 +191,21 @@ label {
 .btn:hover, .btn:active {
 	color: #c0c0c0;
 }
+.logo {
+    font-family: Arial, sans-serif; /* Police de caractères */
+    font-size: 24px; /* Taille de la police */
+    font-weight: bold; /* Gras */
+    color: #800020; /* Rouge grenat */
+    text-transform: uppercase; /* Convertir en majuscules */
+    letter-spacing: 2px; /* Espacement entre les lettres */
+    text-decoration: none; /* Pas de soulignement */
+}
+
+/* Style pour quand le logo est survolé par la souris */
+.logo:hover {
+    color: #ff0000; /* Nouvelle couleur au survol */
+}
+
 ul, .list.custom-list ul {
 	margin: 0 0 11px;
 	list-style-type: none;
