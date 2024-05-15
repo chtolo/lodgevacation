@@ -1,0 +1,59 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const { graphqlHTTP } = require('express-graphql');
+const { buildSchema } = require('graphql');
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+  })
+  .then(() => console.log('DB connection successful!'));
+
+const port = process.env.PORT || 3000;
+
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+
+// Schéma GraphQL
+const schema = buildSchema(`
+  type Query {
+    hello: String
+    projects: [Project]
+  }
+
+  type Project {
+    id: Int
+    name: String
+    description: String
+  }
+`);
+
+// Résolveurs
+const root = {
+  hello: () => 'Bonjour depuis GraphQL !',
+  projects: () => {
+    // Ici, vous pouvez placer la logique pour récupérer les données des projets depuis une base de données ou autre source
+    return [
+      { id: 1, name: 'Projet 1', description: 'Description du projet 1' },
+      { id: 2, name: 'Projet 2', description: 'Description du projet 2' },
+      { id: 3, name: 'Projet 3', description: 'Description du projet 3' }
+    ];
+  }
+};
+
+// Créer une application Express
+const app = express();
+
+// Middleware pour gérer les requêtes GraphQL
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true // Pour activer l'interface GraphiQL pour tester les requêtes
+}));
+
+// Démarrer le serveur
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Serveur GraphQL en cours d'exécution sur http://localhost:${PORT}/graphql`);
+});

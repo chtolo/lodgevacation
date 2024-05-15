@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real Estate Builders Free Responsive Website Templates - A Design">
+    <meta name="author" content="webThemez.com">
+    <title>Real Estate Builders Free Responsive Website Templates - A Design</title>
+    <script src="https://kit.fontawesome.com/250b502dca.js" crossorigin="anonymous"></script>
+    <link rel="favicon" href="assets/images/favicon.png">
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="assets/css/isotope.css" media="screen" />
+    <link rel="stylesheet" href="assets/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        /* Animation pour les boutons */
+        .btn-theme {
+            transition: all 0.3s ease;
+        }
+
+        .btn-theme:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animation pour les images */
+        .portfolio-item img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .city-frame {
+            border: 5px solid transparent;
+            padding: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .portfolio-item {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item:hover .city-frame {
+            border-color: #003366; /* Couleur de la ville (Tanger) */
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- Button for smallest screens -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="index.html">
+                    <div class="logo">
+                        <i class="fa-solid fa-house" style="color: #880c0c;"></i>
+                        LodgeVac
+                    </div>
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right mainNav">
+					<li ><a href={{ url_for('home') }}>Home</a></li>
+					<li ><a href={{ url_for('about') }}>About</a></li>
+					<li><a href={{ url_for('services') }}>Services</a></li>
+					<li class="active"><a href={{ url_for('houses') }}>Houses</a></li>
+					<li><a href={{ url_for('contact') }}>Contact</a></li>
+                    <li><a href={{ url_for('login') }}><button type="button"  class="btn btn-default">Login</button></a></li>
+                    <li><a href={{ url_for('signup') }}><button type="button"  class="btn btn-default" >Sign-up</button></a></li>
+
+				</ul>
+			</div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+    <!-- /.navbar -->
+
+
+    <header id="head" class="secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1>our houses</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- container -->
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <section id="portfolio" class="page-section section appear clearfix">
+                    <br />
+                    <br />
+                    <p>
+                        "Choisir la maison idéale pour des vacances inoubliables peut transformer votre séjour en une expérience inégalée, où chaque détail devient un souvenir précieux à chérir pour les années à venir."
+                        <br />
+                        <br />
+                    </p>
+
+
+                    <div class="row">
+                        <nav id="filter" class="col-md-12 text-center">
+                            <ul>
+                                <li><a href="#marrakech" class="btn-theme btn-small filter" data-filter=".marrakech">Marrakech</a></li>
+                                <li><a href="#agadir" class="btn-theme btn-small filter" data-filter=".agadir">Agadir</a></li>
+                                <li><a href="#tanger" class="btn-theme btn-small filter" data-filter=".tanger">Tanger</a></li>
+                                <li><a href="#tetouan" class="btn-theme btn-small filter" data-filter=".tetouan">Tétouan</a></li>
+                                <li><a href="#casablanca" class="btn-theme btn-small filter" data-filter=".casablanca">Casablanca</a></li>
+                                <li><a href="#saidia" class="btn-theme btn-small filter" data-filter=".saidia">Saidia</a></li>
+                                <!-- Ajouter d'autres villes ici -->
+                            </ul>
+                        </nav>
+                        <div class="col-md-12">
+                            <!-- Marrakech -->
+                            <div id="marrakech" class="row portfolio-items isotopeWrapper clearfix" id="3">
+                                <!-- Articles pour les maisons à Marrakech -->
+                                <article class="col-sm-4 isotopeItem marrakech">
+                                    <div class="portfolio-item">
+                                        <a href="marrakech_details1.html">
+                                            <img src="https://i.pinimg.com/564x/da/2d/0f/da2d0f913c8076f4653bada0e58c868f.jpg" alt="Marrakech House 1" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem marrakech">
+                                    <div class="portfolio-item">
+                                        <a href="marrakech_details2.html">
+                                            <img src="https://i.pinimg.com/564x/e1/a1/72/e1a1726213334360ef871c693c7047e8.jpg" alt="Marrakech House 2" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem marrakech">
+                                    <div class="portfolio-item">
+                                        <a href="marrakech_details3.html">
+                                            <img src="https://i.pinimg.com/564x/4e/d3/66/4ed36650ca531d4c3b07fe930db0054b.jpg" alt="Marrakech House 3" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- Agadir -->
+                            <div id="agadir" class="row portfolio-items isotopeWrapper clearfix" id="3">
+                                <!-- Articles pour les maisons à Agadir -->
+                                <article class="col-sm-4 isotopeItem agadir">
+                                    <div class="portfolio-item">
+                                        <a href="agadir_details1.html">
+                                            <img src="https://i.pinimg.com/564x/de/9f/9e/de9f9eb2e3019a8254fb0906b71a39e6.jpg" alt="Agadir House 1" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem agadir">
+                                    <div class="portfolio-item">
+                                        <a href="agadir_details2.html">
+                                            <img src="https://i.pinimg.com/564x/e5/f2/8e/e5f28e3263d028020a494f48a25c6fde.jpg" alt="Agadir House 2" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem agadir">
+                                    <div class="portfolio-item">
+                                        <a href="agadir_details3.html">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi3e7ks1xg0HODWqlE-jJAPNjVA7dK02v3FsNZS4KT3KO6Imo&s" alt="Agadir House 3" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- Tanger -->
+                            <div id="tanger" class="row portfolio-items isotopeWrapper clearfix" id="3">
+                                <!-- Articles pour les maisons à Tanger -->
+                                <article class="col-sm-4 isotopeItem tanger">
+                                    <div class="portfolio-item">
+                                        <a href="tanger_details1.html">
+                                            <img src="https://i.pinimg.com/564x/23/dd/8a/23dd8ac59fb1368d28f8361e643513aa.jpg" alt="Tanger House 1" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem tanger">
+                                    <div class="portfolio-item">
+                                        <a href="tanger_details2.html">
+                                            <img src="https://i.pinimg.com/736x/11/a9/40/11a940601c30f143f705af0f11403054.jpg" alt="Tanger House 2" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem tanger">
+                                    <div class="portfolio-item">
+                                        <a href="tanger_details3.html">
+                                            <img src="https://dar-rima-tanger-tangier.hotelmix.fr/data/Photos/OriginalPhoto/13966/1396609/1396609532/Appartement-Dar-Rima-Tanger-Exterior.JPEG" alt="Tanger House 3" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- Tétouan -->
+                            <div id="tetouan" class="row portfolio-items isotopeWrapper clearfix" id="3">
+                                <!-- Articles pour les maisons à Tétouan -->
+                                <article class="col-sm-4 isotopeItem tetouan">
+                                    <div class="portfolio-item">
+                                        <a href="tetouan_details1.html">
+                                            <img src="https://i.pinimg.com/564x/32/05/41/320541bca2de03be9ba2bde1abae2b09.jpg" alt="Tétouan House 1" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem tetouan">
+                                    <div class="portfolio-item">
+                                        <a href="tetouan_details2.html">
+                                            <img src="https://a0.muscache.com/im/pictures/81277ec2-8875-4ece-bfc0-5df51152c88d.jpg?im_w=960" alt="Tétouan House 2" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem tetouan">
+                                    <div class="portfolio-item">
+                                        <a href="tetouan_details3.html">
+                                            <img src="https://a0.muscache.com/im/pictures/01e2b3dd-673e-49fb-afe6-c90808e4817f.jpg?im_w=720" alt="Tétouan House 3" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- Casablanca -->
+                            <div id="casablanca" class="row portfolio-items isotopeWrapper clearfix" id="3">
+                                <!-- Articles pour les maisons à Casablanca -->
+                                <article class="col-sm-4 isotopeItem casablanca">
+                                    <div class="portfolio-item">
+                                        <a href="casablanca_details1.html">
+                                            <img src="https://a0.muscache.com/im/pictures/82b94404-b9c4-4990-8d6f-f01b38a78dd4.jpg?im_w=720" alt="Casablanca House 1" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem casablanca">
+                                    <div class="portfolio-item">
+                                        <a href="casablanca_details2.html">
+                                            <img src="https://a0.muscache.com/im/pictures/4a665d74-0582-46a7-93ce-bab5647cd634.jpg?im_w=720" alt="Casablanca House 2" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem casablanca">
+                                    <div class="portfolio-item">
+                                        <a href="casablanca_details3.html">
+                                            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-53053659/original/f6eea652-26ca-4c8a-a47e-739f76887471.jpeg?im_w=1200" alt="" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- Saidia -->
+                            <div id="saidia" class="row portfolio-items isotopeWrapper clearfix" id="3">
+                                <!-- Articles pour les maisons à Saidia -->
+                                <article class="col-sm-4 isotopeItem saidia">
+                                    <div class="portfolio-item">
+                                        <a href="saidia_details1.html">
+                                            <img src="data:image/jpeg;base64,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" alt="Saidia House 1" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem saidia">
+                                    <div class="portfolio-item">
+                                        <a href="saidia_details2.html">
+                                            <img src="https://media.vrbo.com/lodging/79000000/78610000/78605900/78605806/15fa5e0a.jpg?impolicy=resizecrop&rw=598&ra=fit" alt="Saidia House 2" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                                <article class="col-sm-4 isotopeItem saidia">
+                                    <div class="portfolio-item">
+                                        <a href="saidia_details3.html">
+                                            <img src="data:image/jpeg;base64,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" alt="Saidia House 3" />
+                                        </a>
+                                        <!-- Autres informations sur la maison -->
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- Ajouter d'autres sections pour les autres villes avec les articles appropriés -->
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Scripts -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.cslider.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Isotope Plugin
+            var $container = $('.isotopeWrapper');
+            var $resize = $('.isotopeWrapper').attr('id');
+            // initialize isotope
+
+            $container.isotope({
+                itemSelector: '.isotopeItem',
+                resizable: false, // disable normal resizing
+                masonry: {
+                    columnWidth: $container.width() / $resize
+                }
+            });
+
+            $('nav#filter a').click(function () {
+                var selector = $(this).attr('data-filter');
+                $container.isotope({
+                    filter: selector
+                });
+                return false;
+            });
+
+            // re-layout on window resize
+            $(window).smartresize(function () {
+                $container.isotope({
+                    // update columnWidth to a percentage of container width
+                    masonry: {
+                        columnWidth: $container.width() / $resize
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

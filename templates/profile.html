@@ -95,13 +95,13 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right mainNav">
-					<li ><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="services.html">Services</a></li>
-					<li><a href="houses.html">Houses</a></li>
-					<li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html"><button type="button"  class="btn btn-default">Login</button></a></li>
-                    <li class="active"><a href="signup.html"><button type="button"  class="btn btn-default" >Sign-up</button></a></li>
+					<li ><a href={{ url_for('home') }}>Home</a></li>
+					<li ><a href={{ url_for('about') }}>About</a></li>
+					<li ><a href={{ url_for('services') }}>Services</a></li>
+					<li><a href={{ url_for('houses') }}>Houses</a></li>
+					<li><a href={{ url_for('contact') }}>Contact</a></li>
+                    <li><a href={{ url_for('login') }}><button type="button"  class="btn btn-default">Login</button></a></li>
+                    <li><a href={{ url_for('signup') }}><button type="button"  class="btn btn-default" >Sign-up</button></a></li>
 
 				</ul>
 			</div>
@@ -111,31 +111,19 @@
 	<!-- /.navbar -->
 
 
-	<!-- Contenu principal -->
-	<div class="container">
-		<!-- Titre de la section Sign Up -->
-		<h1>Sign Up</h1>
-		<!-- Formulaire de sign up -->
-		<form class="signup-form" action="signup_process.php" method="post">
-			<div class="form-group">
-				<label for="username">Username:</label>
-				<input type="text" id="username" name="username" required>
-			</div>
-			<div class="form-group">
-				<label for="email">Email:</label>
-				<input type="email" id="email" name="email" required>
-			</div>
-			<div class="form-group">
-				<label for="password">Password:</label>
-				<input type="password" id="password" name="password" required>
-			</div>
-			<div class="form-group">
-				<label for="confirm_password">Confirm Password:</label>
-				<input type="password" id="confirm_password" name="confirm_password" required>
-			</div>
-			<button type="submit">Sign Up</button>
-		</form>
-	</div>
+	
+		<!-- Contenu principal -->
+<div class="container">
+    <div class="profile-section">
+        <!-- Titre de la section Profile -->
+        <h1>Profile</h1>
+        <!-- Affichage des informations de l'utilisateur -->
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <!-- Vous pouvez ajouter d'autres informations de profil ici -->
+    </div>
+</div>
+
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

@@ -37,13 +37,13 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right mainNav">
-					<li ><a href="index.html">Home</a></li>
-					<li class="active"><a href="about.html">About</a></li>
-					<li><a href="services.html">Services</a></li>
-					<li><a href="houses.html">Houses</a></li>
-					<li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html"><button type="button"  class="btn btn-default">Login</button></a></li>
-                    <li><a href="signup.html"><button type="button"  class="btn btn-default" >Sign-up</button></a></li>
+					<li ><a href={{ url_for('home') }}>Home</a></li>
+					<li class="active"><a href={{ url_for('about') }}>About</a></li>
+					<li><a href={{ url_for('services') }}>Services</a></li>
+					<li><a href={{ url_for('houses') }}>Houses</a></li>
+					<li><a href={{ url_for('contact') }}>Contact</a></li>
+                    <li><a href={{ url_for('login') }}><button type="button"  class="btn btn-default">Login</button></a></li>
+                    <li><a href={{ url_for('signup') }}><button type="button"  class="btn btn-default" >Sign-up</button></a></li>
 
 				</ul>
 			</div>
@@ -72,7 +72,6 @@
                 <p>
                     <img src="assets/images/about.jpg" alt="" class="img-rounded pull-right" width="300">
                     Bienvenue sur notre application web dédiée à faciliter la location de maisons de vacances et la gestion des allocations au Maroc. Notre plateforme offre une expérience unique pour les voyageurs en quête de logements confortables et authentiques, ainsi que pour les propriétaires souhaitant rentabiliser leurs biens. Que vous soyez à la recherche d'un riad pittoresque dans les ruelles envoûtantes de Marrakech, d'une villa moderne sur les plages dorées d'Agadir, ou d'une escapade tranquille dans les montagnes de l'Atlas, notre application vous met en relation avec une gamme diversifiée de locations de vacances répondant à vos besoins. Avec notre engagement envers la qualité, la transparence et le service clientèle exceptionnel, nous sommes fiers de faciliter des séjours mémorables et sans tracas pour nos utilisateurs. Explorez notre sélection de propriétés uniques et préparez-vous à vivre une expérience inoubliable au Maroc avec nous.                </p>
-                <p>Consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
             </section>
         </div>
     </section>
