@@ -7,6 +7,8 @@
     <meta name="description" content="LodgeVac">
     <meta name="author" content="">
     <title>LodgeVac</title>
+    <link rel="icon" type="image/png" href="assets\images\icon.png">
+
     <script src="https://kit.fontawesome.com/250b502dca.js" crossorigin="anonymous"></script>
     <link rel="favicon" href="assets/images/favicon.png">
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -67,7 +69,7 @@
             <div class="navbar-header">
                 <!-- Button for smallest screens -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href={{ url_for('home') }}>
                     <div class="logo">
                         <i class="fa-solid fa-house" style="color: #880c0c;"></i>
                         LodgeVac
@@ -134,7 +136,7 @@
                                 <!-- Articles pour les maisons à Marrakech -->
                                 <article class="col-sm-4 isotopeItem marrakech">
                                     <div class="portfolio-item">
-                                        <a href="marrakech_details1.html">
+                                        <a href={{ url_for('marrakech_details1') }} >
                                             <img src="https://i.pinimg.com/564x/da/2d/0f/da2d0f913c8076f4653bada0e58c868f.jpg" alt="Marrakech House 1" />
                                         </a>
                                         <!-- Autres informations sur la maison -->
@@ -142,7 +144,7 @@
                                 </article>
                                 <article class="col-sm-4 isotopeItem marrakech">
                                     <div class="portfolio-item">
-                                        <a href="marrakech_details2.html">
+                                        <a href={{ url_for('marrakech_details2') }} >
                                             <img src="https://i.pinimg.com/564x/e1/a1/72/e1a1726213334360ef871c693c7047e8.jpg" alt="Marrakech House 2" />
                                         </a>
                                         <!-- Autres informations sur la maison -->
@@ -150,7 +152,7 @@
                                 </article>
                                 <article class="col-sm-4 isotopeItem marrakech">
                                     <div class="portfolio-item">
-                                        <a href="marrakech_details3.html">
+                                        <a href={{ url_for('marrakech_details3') }} >
                                             <img src="https://i.pinimg.com/564x/4e/d3/66/4ed36650ca531d4c3b07fe930db0054b.jpg" alt="Marrakech House 3" />
                                         </a>
                                         <!-- Autres informations sur la maison -->
@@ -162,7 +164,7 @@
                                 <!-- Articles pour les maisons à Agadir -->
                                 <article class="col-sm-4 isotopeItem agadir">
                                     <div class="portfolio-item">
-                                        <a href="agadir_details1.html">
+                                        <a href={{ url_for('agadir_details1') }} >
                                             <img src="https://i.pinimg.com/564x/de/9f/9e/de9f9eb2e3019a8254fb0906b71a39e6.jpg" alt="Agadir House 1" />
                                         </a>
                                         <!-- Autres informations sur la maison -->
@@ -170,7 +172,7 @@
                                 </article>
                                 <article class="col-sm-4 isotopeItem agadir">
                                     <div class="portfolio-item">
-                                        <a href="agadir_details2.html">
+                                        <a href={{ url_for('agadir_details2') }}>
                                             <img src="https://i.pinimg.com/564x/e5/f2/8e/e5f28e3263d028020a494f48a25c6fde.jpg" alt="Agadir House 2" />
                                         </a>
                                         <!-- Autres informations sur la maison -->
@@ -178,7 +180,7 @@
                                 </article>
                                 <article class="col-sm-4 isotopeItem agadir">
                                     <div class="portfolio-item">
-                                        <a href="agadir_details3.html">
+                                        <a href={{ url_for('agadir_details3') }}>
                                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi3e7ks1xg0HODWqlE-jJAPNjVA7dK02v3FsNZS4KT3KO6Imo&s" alt="Agadir House 3" />
                                         </a>
                                         <!-- Autres informations sur la maison -->

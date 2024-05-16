@@ -1,13 +1,21 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
-
-from pymongo import MongoClient
+from flask import Flask, render_template, request, flash, redirect, url_for, session 
+from flask_mysqldb import MySQL
+import MySQLdb.cursors 
+import re
 
 app = Flask(__name__, static_folder='assets')
 
-# Connexion à la base de données MongoDB
-client = MongoClient('localhost', 27017)
-db = client['My_DB']
-users_collection = db['utilisateurs']
+# Configuration de la base de données MySQL
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'mydb'
+
+mysql = MySQL(app)
+
+app.secret_key = 'your_secret_key'  # Définissez une clé secrète unique et sécurisée
+
+
 
 @app.route("/")
 def home():
@@ -25,41 +33,90 @@ def contact():
 def houses():
     return render_template('houses.html')
 
+@app.route("/marrakech_details1", methods=['GET', 'POST'])
+def marrakech_details1():
+    return render_template('marrakech_details1.html')
+
+@app.route("/marrakech_details2", methods=['GET', 'POST'])
+def marrakech_details2():
+    return render_template('marrakech_details2.html')
+
+@app.route("/marrakech_details3", methods=['GET', 'POST'])
+def marrakech_details3():
+    return render_template('marrakech_details3.html')
+
+@app.route("/agadir_details1", methods=['GET', 'POST'])
+def agadir_details1():
+    return render_template('agadir_details1.html')
+
+@app.route("/agadir_details2", methods=['GET', 'POST'])
+def agadir_details2():
+    return render_template('agadir_details2.html')
+@app.route("/agadir_details3", methods=['GET', 'POST'])
+def agadir_details3():
+    return render_template('agadir_details3.html')
+
+@app.route("/reservation", methods=['POST'])
+def reservation():
+    if request.method == 'POST':
+        number = request.form['number']
+        # Insérer les données de réservation dans la table "réservation"
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO reservation (number) VALUES (%s)", (number,))
+        mysql.connection.commit()
+        cur.close()
+        return "Réservation effectuée avec succès!"
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    mesage = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
         password = request.form['password']
-        # Vérifier si l'utilisateur existe dans la base de données
-        user = users_collection.find_one({'email': email, 'password': password})
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM user WHERE email = % s AND password = % s', (email, password, ))
+        user = cursor.fetchone()
         if user:
-            # Utilisateur trouvé, rediriger vers la page de profil
-            return redirect('profile.html')
+            session['loggedin'] = True
+            session['userid'] = user['userid']
+            session['name'] = user['name']
+            session['email'] = user['email']
+            mesage = 'Logged in successfully !'
+            return render_template('profile.html', mesage = mesage)
         else:
-            # Utilisateur non trouvé, afficher un message d'erreur
-            flash('Identifiants incorrects. Veuillez réessayer.', 'error')
-    return render_template('login.html')
+            mesage = 'Please enter correct email / password !'
+    return render_template('login.html', mesage = mesage)
+
+    
 
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
-    if request.method == 'POST':
-        # Récupérer les données du formulaire
+    mesage = ''
+    if request.method == 'POST' and 'name' in request.form and 'password' in request.form and 'email' in request.form :
         name = request.form['name']
-        email = request.form['email']
         password = request.form['password']
-        # Vérifier si l'utilisateur existe déjà dans la base de données
-        existing_user = users_collection.find_one({'email': email})
-        if existing_user:
-            # Utilisateur existant, afficher un message d'erreur
-            flash('Cet email est déjà utilisé. Veuillez utiliser un autre email.', 'error')
+        email = request.form['email']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM user WHERE email = % s', (email, ))
+        account = cursor.fetchone()
+        
+        if account:
+            mesage = 'Account already exists !'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            mesage = 'Invalid email address !'
+        elif not name or not password or not email:
+            mesage = 'Please fill out the form !'
         else:
-            # Ajouter l'utilisateur à la base de données
-            new_user = {'name': name, 'email': email, 'password': password}
-            users_collection.insert_one(new_user)
-            return redirect('profile.html')
-    return render_template('signup.html')
+            cursor.execute('INSERT INTO user VALUES (NULL, % s, % s, % s)', (name, email, password, ))
+            mysql.connection.commit()
+            mesage = 'You have successfully registered !'
+    elif request.method == 'POST':
+        mesage = 'Please fill out the form !'
+    return render_template('signup.html', mesage = mesage)
+
+   
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -71,6 +128,12 @@ def profile():
         return render_template('profile.html', user=user)
     else:
         return redirect(url_for('login'))
+@app.route('/logout')
+def logout():
+    session.pop('loggedin', None)
+    session.pop('userid', None)
+    session.pop('email', None)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
 	app.run(debug = True)
