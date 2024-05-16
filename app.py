@@ -24,9 +24,7 @@ def contact():
 @app.route("/houses", methods=['GET', 'POST'])
 def houses():
     return render_template('houses.html')
-@app.route("/services",methods=['GET', 'POST'])
-def services():
-    return render_template('services.html')
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -37,7 +35,7 @@ def login():
         user = users_collection.find_one({'email': email, 'password': password})
         if user:
             # Utilisateur trouvé, rediriger vers la page de profil
-            return redirect(url_for('profile'))
+            return redirect('profile.html')
         else:
             # Utilisateur non trouvé, afficher un message d'erreur
             flash('Identifiants incorrects. Veuillez réessayer.', 'error')
@@ -60,16 +58,19 @@ def signup():
             # Ajouter l'utilisateur à la base de données
             new_user = {'name': name, 'email': email, 'password': password}
             users_collection.insert_one(new_user)
-            return redirect(url_for('profile'))
+            return redirect('profile.html')
     return render_template('signup.html')
 
-@app.route("/profile")
+@app.route("/profile", methods=['GET', 'POST'])
 def profile():
-    name = request.form['name']
-    email = request.form['email']
-    password = request.form['password']
-    user_info = {'username': name, 'email': email ,'password': password }
-    return render_template('profile.html', user=user_info)
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        user = {'username': username, 'email': email, 'password': password}
+        return render_template('profile.html', user=user)
+    else:
+        return redirect(url_for('login'))
 
 if __name__ == '__main__':
 	app.run(debug = True)
