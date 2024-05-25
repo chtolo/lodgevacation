@@ -101,62 +101,40 @@
                 <p><strong>Prix :</strong> 2500 dirhams par nuit.</p>
                 <p><strong>Description :</strong> Perchée sur une colline surplombant l'océan Atlantique, la Villa Ocean View offre une vue panoramique spectaculaire depuis ses terrasses ensoleillées. Avec ses cinq chambres spacieuses, son design contemporain et son accès facile aux plages et aux attractions locales, elle constitue le refuge idéal pour des vacances balnéaires de luxe à Agadir.</p>
             </div>
-            <button class="button" onclick="afficherConfirmation()">Réserver</button>
-            <p id="confirmation">Votre réservation est faite avec succès.</p>
+            <button class="button" onclick="redirigerVersProfile()">Réserver</button>
         </div>
     </div>
-      
-    	 
+
     <footer id="footer">
-		<div class="container">
-			<div class="social text-center">
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-flickr"></i></a>
-				<a href="#"><i class="fa fa-github"></i></a>
-			</div>
+        <div class="container">
+            <div class="social text-center">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-flickr"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </footer>
 
-			<div class="clear"></div>
-			<!--CLEAR FLOATS-->
-		</div>
-		
-	</footer>
-
-	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+    <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
     <script>
-        function afficherConfirmation() {
-            document.getElementById("confirmation").style.display = "block";
+        function redirigerVersProfile() {
+            window.location.href = "{{ url_for('profile') }}";
         }
     </script>
 
-	<script src="assets/js/modernizr-latest.js"></script> 
-	<script type='text/javascript' src='assets/js/jquery.min.js'></script>
+    <script src="assets/js/modernizr-latest.js"></script> 
+    <script type='text/javascript' src='assets/js/jquery.min.js'></script>
     <script type='text/javascript' src='assets/js/fancybox/jquery.fancybox.pack.js'></script>
     
     <script type='text/javascript' src='assets/js/jquery.mobile.customized.min.js'></script>
     <script type='text/javascript' src='assets/js/jquery.easing.1.3.js'></script> 
     <script type='text/javascript' src='assets/js/camera.min.js'></script> 
     <script src="assets/js/bootstrap.min.js"></script> 
-	<script src="assets/js/custom.js"></script>
-    <!--<script>
-		jQuery(function(){
-			
-			jQuery('#camera_wrap_4').camera({
-				height: '600',
-				loader: 'bar',
-				pagination: false,
-				thumbnails: false,
-				hover: false,
-				opacityOnGrid: false,
-				imagePath: 'assets/images/'
-			});
-
-		});
-	</script>-->
-    
+    <script src="assets/js/custom.js"></script>
 </body>
 </html>
-
 
     

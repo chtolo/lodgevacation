@@ -101,66 +101,40 @@
                 <p><strong>Prix :</strong> 5000 dirhams par nuit.</p>
                 <p><strong>Description :</strong> Nichée le long de la pittoresque Route de l'Ourika, cette villa offre une vue imprenable sur les montagnes de l'Atlas. Dotée de vastes espaces de vie, d'un hammam traditionnel et d'un jardin exotique, contient 3 chambres, elle promet une expérience de séjour inoubliable à Marrakech.</p>
             </div>
-            <button class="button" onclick="afficherConfirmation()">Réserver</button>
-            <p id="confirmation">Votre réservation est faite avec succès.</p>
+            <button class="button" onclick="redirigerVersProfile()">Réserver</button>
         </div>
     </div>
 
-   
-  
-      
-    	 
     <footer id="footer">
-		<div class="container">
-			<div class="social text-center">
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-flickr"></i></a>
-				<a href="#"><i class="fa fa-github"></i></a>
-			</div>
+        <div class="container">
+            <div class="social text-center">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-flickr"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </footer>
 
-			<div class="clear"></div>
-			<!--CLEAR FLOATS-->
-		</div>
-		
-	</footer>
-
-	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+    <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
     <script>
-        function afficherConfirmation() {
-            document.getElementById("confirmation").style.display = "block";
+        function redirigerVersProfile() {
+            window.location.href = "{{ url_for('profile') }}";
         }
     </script>
 
-	<script src="assets/js/modernizr-latest.js"></script> 
-	<script type='text/javascript' src='assets/js/jquery.min.js'></script>
+    <script src="assets/js/modernizr-latest.js"></script> 
+    <script type='text/javascript' src='assets/js/jquery.min.js'></script>
     <script type='text/javascript' src='assets/js/fancybox/jquery.fancybox.pack.js'></script>
     
     <script type='text/javascript' src='assets/js/jquery.mobile.customized.min.js'></script>
     <script type='text/javascript' src='assets/js/jquery.easing.1.3.js'></script> 
     <script type='text/javascript' src='assets/js/camera.min.js'></script> 
     <script src="assets/js/bootstrap.min.js"></script> 
-	<script src="assets/js/custom.js"></script>
-    <!--<script>
-		jQuery(function(){
-			
-			jQuery('#camera_wrap_4').camera({
-				height: '600',
-				loader: 'bar',
-				pagination: false,
-				thumbnails: false,
-				hover: false,
-				opacityOnGrid: false,
-				imagePath: 'assets/images/'
-			});
-
-		});
-	</script>-->
-    
+    <script src="assets/js/custom.js"></script>
 </body>
 </html>
-
-    
 
    

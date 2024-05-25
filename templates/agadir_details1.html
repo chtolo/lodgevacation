@@ -101,67 +101,38 @@
                 <p><strong>Prix :</strong> 3000 dirhams par nuit.</p> 
                 <p><strong>Description :</strong> La Villa Soleil est une luxueuse propriété située dans le quartier prisé d'Agadir. Avec ses vastes espaces extérieurs, sa piscine privée et ses intérieurs élégamment aménagés, elle offre un séjour inoubliable pour les voyageurs en quête de confort et de tranquillité.</p>
             </div>
-            <form action="{{ url_for('reservation') }}" method="post">
-                <label for="number">Nombre de nuits :</label>
-                <input type="number" id="number" class="form-control" name="number" required>
-                <button class="button" type="submit" onclick="afficherConfirmation()">Réserver</button>
-            </form>
-            <p id="confirmation">Votre réservation est faite avec succès.</p>
+            <button class="button" onclick="redirigerVersProfile()">Réserver</button>
         </div>
     </div>
 
-
-      
-    	 
     <footer id="footer">
-		<div class="container">
-			<div class="social text-center">
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-flickr"></i></a>
-				<a href="#"><i class="fa fa-github"></i></a>
-			</div>
+        <div class="container">
+            <div class="social text-center">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-flickr"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </footer>
 
-			<div class="clear"></div>
-			<!--CLEAR FLOATS-->
-		</div>
-		
-	</footer>
-
-	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+    <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
     <script>
-        function afficherConfirmation() {
-            document.getElementById("confirmation").style.display = "block";
+        function redirigerVersProfile() {
+            window.location.href = "{{ url_for('profile') }}";
         }
     </script>
 
-	<script src="assets/js/modernizr-latest.js"></script> 
-	<script type='text/javascript' src='assets/js/jquery.min.js'></script>
+    <script src="assets/js/modernizr-latest.js"></script> 
+    <script type='text/javascript' src='assets/js/jquery.min.js'></script>
     <script type='text/javascript' src='assets/js/fancybox/jquery.fancybox.pack.js'></script>
     
     <script type='text/javascript' src='assets/js/jquery.mobile.customized.min.js'></script>
     <script type='text/javascript' src='assets/js/jquery.easing.1.3.js'></script> 
     <script type='text/javascript' src='assets/js/camera.min.js'></script> 
     <script src="assets/js/bootstrap.min.js"></script> 
-	<script src="assets/js/custom.js"></script>
-    <!--<script>
-		jQuery(function(){
-			
-			jQuery('#camera_wrap_4').camera({
-				height: '600',
-				loader: 'bar',
-				pagination: false,
-				thumbnails: false,
-				hover: false,
-				opacityOnGrid: false,
-				imagePath: 'assets/images/'
-			});
-
-		});
-	</script>-->
-    
+    <script src="assets/js/custom.js"></script>
 </body>
 </html>
-
-

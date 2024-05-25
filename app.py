@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, session 
+from flask import Flask, flash, render_template, request, session, redirect, url_for
 from flask_mysqldb import MySQL
-import MySQLdb.cursors 
+import MySQLdb.cursors
 import re
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, static_folder='assets')
 
@@ -15,17 +16,15 @@ mysql = MySQL(app)
 
 app.secret_key = 'your_secret_key'  # Définissez une clé secrète unique et sécurisée
 
-
-
 @app.route("/")
 def home():
     return render_template('index.html')
 
-@app.route("/about",methods=['GET', 'POST'])
+@app.route("/about", methods=['GET', 'POST'])
 def about():
     return render_template('about.html')
 
-@app.route("/contact",methods=['GET', 'POST'])
+@app.route("/contact", methods=['GET', 'POST'])
 def contact():
     return render_template('contact.html')
 
@@ -52,82 +51,114 @@ def agadir_details1():
 @app.route("/agadir_details2", methods=['GET', 'POST'])
 def agadir_details2():
     return render_template('agadir_details2.html')
+
 @app.route("/agadir_details3", methods=['GET', 'POST'])
 def agadir_details3():
     return render_template('agadir_details3.html')
+@app.route('/reservation', methods=['POST'])
 
-@app.route("/reservation", methods=['POST'])
+
+
+
 def reservation():
-    if request.method == 'POST':
-        number = request.form['number']
-        # Insérer les données de réservation dans la table "réservation"
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO reservation (number) VALUES (%s)", (number,))
-        mysql.connection.commit()
-        cur.close()
-        return "Réservation effectuée avec succès!"
+    if 'email' not in session:
+        flash('Vous devez être connecté pour faire une réservation.', 'error')
+        return redirect(url_for('login'))  # Redirigez vers la page de connexion
 
+    email = session['email']
+
+    # Vérifiez que les autres champs sont présents
+    nom_maison = request.form.get('nomdemaison')
+    date = request.form.get('date')
+    nombre_personnes = request.form.get('nombrePersonnes')
+    nombre_nuits = request.form.get('nombreNuits')
+
+    if not nom_maison or not date or not nombre_personnes or not nombre_nuits:
+        flash('Tous les champs sont requis.', 'error')
+        return redirect(url_for('reservation_form_page'))  # 'reservation_form_page' est le nom de la route de votre formulaire de réservation
+
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM user WHERE email = %s', (email,))
+    user = cur.fetchone()
+    if not user:
+        flash('Utilisateur non trouvé.', 'error')
+        return redirect(url_for('reservation_form_page'))
+
+    # Vérifiez si la maison est déjà réservée à la même date
+    cur.execute('SELECT * FROM reservation WHERE nom_maison = %s AND date = %s', (nom_maison, date))
+    existing_reservation = cur.fetchone()
+    if existing_reservation:
+        flash('Cette maison est déjà réservée pour cette date.', 'error')
+        return 'cette maison est réservé pour cette date '
+
+    # Insérer la réservation si elle n'existe pas déjà
+    cur.execute("INSERT INTO reservation (email, nom_maison, date, nombre_personnes, nombre_nuits) VALUES (%s, %s, %s, %s, %s)", 
+                (email, nom_maison, date, nombre_personnes, nombre_nuits))
+    mysql.connection.commit()
+    cur.close()
+    
+    return 'Réservation enregistrée avec succès !'
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    mesage = ''
+    message = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
         password = request.form['password']
+        
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM user WHERE email = % s AND password = % s', (email, password, ))
+        cursor.execute('SELECT * FROM user WHERE email = %s', (email,))
         user = cursor.fetchone()
-        if user:
+        
+        if user and check_password_hash(user['password'], password):
             session['loggedin'] = True
             session['userid'] = user['userid']
             session['name'] = user['name']
             session['email'] = user['email']
-            mesage = 'Logged in successfully !'
-            return render_template('profile.html', mesage = mesage)
+            return redirect(url_for('profile'))
         else:
-            mesage = 'Please enter correct email / password !'
-    return render_template('login.html', mesage = mesage)
-
-    
+            message = 'Please enter correct email / password!'
+    return render_template('login.html', message=message)
 
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
-    mesage = ''
-    if request.method == 'POST' and 'name' in request.form and 'password' in request.form and 'email' in request.form :
+    message = ''
+    if request.method == 'POST' and 'name' in request.form and 'password' in request.form and 'email' in request.form:
         name = request.form['name']
         password = request.form['password']
         email = request.form['email']
+        
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM user WHERE email = % s', (email, ))
+        cursor.execute('SELECT * FROM user WHERE email = %s', (email,))
         account = cursor.fetchone()
         
         if account:
-            mesage = 'Account already exists !'
+            message = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            mesage = 'Invalid email address !'
+            message = 'Invalid email address!'
         elif not name or not password or not email:
-            mesage = 'Please fill out the form !'
+            message = 'Please fill out the form!'
         else:
-            cursor.execute('INSERT INTO user VALUES (NULL, % s, % s, % s)', (name, email, password, ))
+            hashed_password = generate_password_hash(password)
+            cursor.execute('INSERT INTO user (name, email, password) VALUES (%s, %s, %s)', (name, email, hashed_password))
             mysql.connection.commit()
-            mesage = 'You have successfully registered !'
+            message = 'You have successfully registered!'
     elif request.method == 'POST':
-        mesage = 'Please fill out the form !'
-    return render_template('signup.html', mesage = mesage)
+        message = 'Please fill out the form!'
+    
+    return render_template('signup.html', message=message)
 
-   
+@app.route("/profile")
 
-@app.route("/profile", methods=['GET', 'POST'])
 def profile():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        user = {'username': username, 'email': email, 'password': password}
+    if 'loggedin' in session:
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM user WHERE userid = %s', (session['userid'],))
+        user = cursor.fetchone()
         return render_template('profile.html', user=user)
-    else:
-        return redirect(url_for('login'))
+    return redirect(url_for('login'))
+
 @app.route('/logout')
 def logout():
     session.pop('loggedin', None)
@@ -136,4 +167,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-	app.run(debug = True)
+    app.run(debug=True)
