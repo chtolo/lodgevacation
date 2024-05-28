@@ -7,9 +7,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__, static_folder='assets')
 
 # Configuration de la base de données MySQL
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'db'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'mydb'
 
 mysql = MySQL(app)
@@ -55,11 +55,8 @@ def agadir_details2():
 @app.route("/agadir_details3", methods=['GET', 'POST'])
 def agadir_details3():
     return render_template('agadir_details3.html')
+
 @app.route('/reservation', methods=['POST'])
-
-
-
-
 def reservation():
     if 'email' not in session:
         flash('Vous devez être connecté pour faire une réservation.', 'error')
@@ -89,7 +86,7 @@ def reservation():
     existing_reservation = cur.fetchone()
     if existing_reservation:
         flash('Cette maison est déjà réservée pour cette date.', 'error')
-        return 'cette maison est réservé pour cette date '
+        return 'Cette maison est réservée pour cette date.'
 
     # Insérer la réservation si elle n'existe pas déjà
     cur.execute("INSERT INTO reservation (email, nom_maison, date, nombre_personnes, nombre_nuits) VALUES (%s, %s, %s, %s, %s)", 
@@ -120,7 +117,6 @@ def login():
             message = 'Please enter correct email / password!'
     return render_template('login.html', message=message)
 
-
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     message = ''
@@ -150,7 +146,6 @@ def signup():
     return render_template('signup.html', message=message)
 
 @app.route("/profile")
-
 def profile():
     if 'loggedin' in session:
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
