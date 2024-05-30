@@ -1,27 +1,20 @@
-# Utiliser une image de base officielle de Python
+# Utiliser une image officielle de Python comme image de base
 FROM python:3.9-slim
 
-# Définir le répertoire de travail à l'intérieur du conteneur
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers requirements.txt (ou équivalent) dans le conteneur
-COPY backend/requirements.txt /app/requirements.txt
+# Copier le fichier requirements.txt dans le conteneur
+COPY requirements.txt .
 
-# Installer les dépendances Python
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Installer les dépendances
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier l'ensemble du code de l'application dans le conteneur
-COPY backend /app
+# Copier le reste de l'application dans le conteneur
+COPY . .
 
 # Exposer le port sur lequel l'application va tourner
 EXPOSE 5000
 
-# Définir la variable d'environnement pour indiquer à Flask de démarrer
-ENV FLASK_APP=app.py
-# Définir les variables d'environnement pour MySQL
-ENV MYSQL_HOST=db
-ENV MYSQL_USER=root
-ENV MYSQL_PASSWORD=password
-ENV MYSQL_DB=mydb
-# Démarrer l'application
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Définir la commande pour lancer l'application
+CMD ["python", "app.py"]

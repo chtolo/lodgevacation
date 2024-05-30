@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: mydb
       MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_PASSWORD: root_password
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
@@ -18,15 +18,15 @@ services:
 
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: flask_container
     environment:
       FLASK_APP: app.py
       FLASK_RUN_HOST: 0.0.0.0
       MYSQL_HOST: db
       MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_PASSWORD: root_password
       MYSQL_DB: mydb
     ports:
       - "5000:5000"
