@@ -1,0 +1,4 @@
+Flask==3.0.3
+Flask-MySQLdb==2.0.0
+pyMysql==1.0.2
+werkzeug==3.0.3
