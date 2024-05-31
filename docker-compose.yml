@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   db:
     build:
@@ -9,8 +10,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: mydb
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root_password
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
@@ -25,8 +26,8 @@ services:
       FLASK_APP: app.py
       FLASK_RUN_HOST: 0.0.0.0
       MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root_password
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
       MYSQL_DB: mydb
     ports:
       - "5000:5000"
