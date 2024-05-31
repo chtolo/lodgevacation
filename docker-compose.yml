@@ -2,8 +2,8 @@ version: '3.8'
 services:
   db:
     build:
-      context: ./db
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: db/Dockerfile
     container_name: mysql_container
     restart: always
     environment:

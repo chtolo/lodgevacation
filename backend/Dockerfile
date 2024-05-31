@@ -1,20 +1,23 @@
-# Utiliser une image officielle de Python comme image de base
-FROM python:3.9-slim
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
 
-# Définir le répertoire de travail
+# Set the working directory
 WORKDIR /app
 
-# Copier le fichier requirements.txt dans le conteneur
-COPY requirements.txt .
+# Copy the requirements file into the container
 
-# Installer les dépendances
+COPY backend/requirements.txt .
+
+# Install system dependencies and MySQL development libraries
+RUN apt-get update && \
+    apt-get install -y default-libmysqlclient-dev build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le reste de l'application dans le conteneur
+# Copy the rest of the application code into the container
 COPY . .
 
-# Exposer le port sur lequel l'application va tourner
-EXPOSE 5000
-
-# Définir la commande pour lancer l'application
+# Command to run the application
 CMD ["python", "app.py"]
